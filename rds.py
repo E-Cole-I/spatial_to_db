@@ -1,5 +1,3 @@
-
-
 # Database Information pulled from external file
 def json_config(file_path):
     import json
@@ -10,7 +8,7 @@ def json_config(file_path):
 def setup_db():
     import psycopg2
     # Set up variables for configuration
-    file_path = 'config/config.json'
+    file_path = '../config/config.json'
     config = json_config(file_path)
     dbname = config['redshift']['dbname']
     host = config['redshift']['host']
@@ -38,6 +36,7 @@ def input_query(query):
     # Execute the query
     cur.execute(query)
     
+    
     # Commit the changes
     con.commit()
     
@@ -54,7 +53,9 @@ def output_query(query):
     # Execute the query
     cur.execute(query)
     
+    
     # Fetch the data return it
     data = cur.fetchall()
+    cur.close()
     return data
 
